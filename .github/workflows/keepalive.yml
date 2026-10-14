@@ -9,10 +9,19 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Read the leaderboard
+      - name: ZOO LINE
+        if: always()
         run: |
           code=$(curl -s -o /dev/null -w "%{http_code}" \
             "https://eyhqfkbajoltsyxbneps.supabase.co/rest/v1/scores?select=name&limit=1" \
             -H "apikey: sb_publishable_UQ1KJiNvlOaInbguwZxrjA_KmvH-WfV")
-          echo "Supabase answered: $code"
+          echo "ZOO LINE answered: $code"
+          test "$code" = "200"
+      - name: HYPERFLY
+        if: always()
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" \
+            "https://uyluypsvlwgqfvaxmlgb.supabase.co/rest/v1/scores?select=*&limit=1" \
+            -H "apikey: sb_publishable_Q68bnrOuHCuC_tz16ToZLQ_oVf6WLIQ")
+          echo "HYPERFLY answered: $code"
           test "$code" = "200"
